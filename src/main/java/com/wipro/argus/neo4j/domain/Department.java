@@ -1,25 +1,34 @@
 package com.wipro.argus.neo4j.domain;
 
+import lombok.AllArgsConstructor;
 import org.springframework.data.neo4j.core.schema.GeneratedValue;
 import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Node;
 import org.springframework.data.neo4j.core.schema.Relationship;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Node
 public class Department {
 
+    private String name;
     @Id  @GeneratedValue
     private UUID id;
-    private String name;
 
-    @Relationship(type = "employee", direction = Relationship.Direction.INCOMING)
+
+    @Relationship(type = "Employee", direction = Relationship.Direction.INCOMING)
     private Set<Employee> employees;
 
     @Relationship(type="Department Manager", direction = Relationship.Direction.INCOMING)
     private Manager manager;
+
+    @Relationship(type="Scrum Team", direction = Relationship.Direction.OUTGOING)
+    private Set<ScrumTeam> scrumTeams;
 
     public Department(UUID id, String name, Set<Employee> employees, Manager manager) {
         this.id = id;
@@ -29,6 +38,17 @@ public class Department {
     }
 
     public Department() {
+    }
+
+    public Set<ScrumTeam> getScrumTeams() {
+        return scrumTeams;
+    }
+
+    public void setScrumTeams(Set<ScrumTeam> scrumTeams) {
+        if(Objects.isNull(scrumTeams)) {
+            return;
+        }
+        this.scrumTeams = scrumTeams;
     }
 
     public void setDepartmentEmployees(Employee employee) {

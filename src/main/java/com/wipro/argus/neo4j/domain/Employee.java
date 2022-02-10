@@ -1,5 +1,8 @@
 package com.wipro.argus.neo4j.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.neo4j.core.schema.GeneratedValue;
 import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Node;
@@ -15,8 +18,10 @@ public class Employee {
 
     private String firstName;
     private String lastName;
-    @Relationship(type="Line Manager", direction = Relationship.Direction.INCOMING)
+    @Relationship(type = "Line Manager", direction = Relationship.Direction.INCOMING)
     private Manager manager;
+
+    String departmentId;
 
     public Employee(UUID id, String firstName, String lastName, Manager manager) {
         this.id = id;
@@ -26,6 +31,14 @@ public class Employee {
     }
 
     public Employee() {
+    }
+
+    public String getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setDepartmentId(String departmentId) {
+        this.departmentId = departmentId;
     }
 
     public Manager getManager() {
