@@ -11,4 +11,6 @@ public interface DepartmentService {
     Department createDepartmentAndEmployees(Department department);
 
     Department getDepartmentAndEmployees(UUID departmentId);
+
+    Object getEmployees(UUID departmentId);
 }
