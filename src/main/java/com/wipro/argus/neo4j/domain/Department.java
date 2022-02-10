@@ -1,5 +1,6 @@
 package com.wipro.argus.neo4j.domain;
 
+import lombok.AllArgsConstructor;
 import org.springframework.data.neo4j.core.schema.GeneratedValue;
 import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Node;
